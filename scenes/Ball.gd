@@ -7,6 +7,8 @@ var speed : int
 var dir : Vector2
 const MAX_Y_VECTOR : float = 0.6
 
+@onready var ballCollisionSound = $"../ballCollisionSound"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	win_size = get_viewport_rect().size
@@ -18,6 +20,7 @@ func new_ball():
 	speed = START_SPEED
 	dir = random_direction()
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame
 func _physics_process(delta):
 	var collision = move_and_collide(dir * speed * delta)
@@ -26,11 +29,13 @@ func _physics_process(delta):
 		collider = collision.get_collider()
 		# if ball hits paddle
 		if collider == $"../Player" or collider == $"../CPU":
+			ballCollisionSound.play()
 			speed += ACCEL
 			dir = new_direction(collider)
 		# if the ball hits a wall
 		else:
 			dir = dir.bounce(collision.get_normal())
+
 
 func random_direction():
 	var new_dir := Vector2()
