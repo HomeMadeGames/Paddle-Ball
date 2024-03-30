@@ -7,7 +7,7 @@ func _ready():
 
 func resume():
 	get_tree().paused = false
-	$AnimationPlayer.play_backwords("blur")
+	$AnimationPlayer.play_backwards("blur")
 	
 func pause():
 	get_tree().paused = true
