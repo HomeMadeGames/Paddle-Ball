@@ -1,2 +1,2 @@
-# Pong
-This is a pong game made in Godot/
+# Paddle-Ball
+This is a Paddle-Ball game made in Godot.
