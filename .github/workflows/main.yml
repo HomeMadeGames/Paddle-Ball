@@ -15,21 +15,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Set up Godot
-    - name: Set up Godot
-      uses: josephbmanley/godot-action@v2.4.0
-      with:
-        godot-version: 3.5.1 # Change this to your Godot version
+    # Download Godot
+    - name: Download Godot
+      run: |
+        wget https://downloads.tuxfamily.org/godotengine/3.5.1/Godot_v3.5.1-stable_linux_headless.64.zip -O godot.zip
+        unzip godot.zip -d godot
+        chmod +x godot/Godot_v3.5.1-stable_linux_headless.64
+        sudo mv godot/Godot_v3.5.1-stable_linux_headless.64 /usr/local/bin/godot
 
     # Build the project
     - name: Export Windows build
       run: |
         mkdir -p build
-        godot --export "Windows Desktop" "build/Paddle-Ball.exe"
-
-    # Upload build artifacts
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: Paddle-Ball
-        path: build/Paddle-Ball.exe
+        godot --export "Windows Des
